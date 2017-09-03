@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen"/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+		<link type="text/css" rel="stylesheet" href="css/my.css" />
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+		<script type="text/javascript" src="clientjs/playsound.js"></script>
+		<script type="text/javascript" src="clientjs/addremovebuttonmanager.js"></script>
+		<script type="text/javascript" src="clientjs/search.js"></script>
+		<script type="text/javascript" src="clientjs/linkcreator.js"></script>
+		<script type="text/javascript" src="clientjs/dragdropmanager.js"></script>
+		<script type="text/javascript" src="clientjs/util.js"></script>
+		<title>YAT - Yet Another Soundboard</title>
+	</head>
+	<body>
+		<div class="row">
+			<h1 class="center-align">Soundboard</h1>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col s1 m2 l3">
+					<div class="right-align">
+						<i class="material-icons" style="font-size: 46px">search</i>
+					</div>
+				</div>
+				<div class="col s10 m8 l6">
+					<input onkeyup="search(this)" id="search" type="text">
+				</div>
+				<div class="col s1 m2 l3">
+					<a id="delSearchButton" href="" onclick="return false" onmouseup="delSearch()" class="left-align">
+						<i class="material-icons" style="font-size: 46px">highlight_off</i>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+<!-- HEAD END -->

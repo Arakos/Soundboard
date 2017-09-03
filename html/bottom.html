@@ -1,0 +1,38 @@
+<!-- BOTTOM START -->
+			</div>
+		</div>
+		<div id="side-container">
+			<div id="startbutton">
+				<a draggable="false" class="waves-effect waves-light btn" onmouseup="createLink()">
+					<i class="material-icons">share</i>
+				</a>
+				<a draggable="false" class="waves-effect waves-light btn" onmouseup="playMashUp()">
+					<i class="material-icons">play_arrow</i>
+				</a>				
+				<a draggable="false" class="waves-effect waves-light btn" onmouseup="removeAll()">
+					<i class="material-icons">clear</i>
+				</a>
+			</div>
+			<div style="margin-bottom: 1.3rem" class="center-align invisOnBottom">
+				<a class="waves-effect waves-light btn red darken-4" onmouseup="haltStop()">Stop!</a>
+			</div>
+			<div id="trash" class="center-align invisOnBottom"
+				ondrop="drop(event)" ondragover="validDropTarget(event)">
+			</div>
+			<div class="progress grey lighten-1 invisOnBottom">
+				<div id="soundprogress" class="determinate green lighten-1" style="width:0%"></div>
+			</div>
+			<div id="concatcontainer" 
+				ondrop="drop(event)" ondragover="validDropTarget(event)">
+			</div>
+		</div>
+		<div id="bottom-small">
+			<a class="waves-effect waves-light btn" onclick="showOrHide(this.parentNode)">
+				<i id="bottom-arrow" class="material-icons">arrow_upward</i>
+			</a>
+		</div>
+		<div id="toastdiv" class="mytoast">
+			Hi im a Toast. If you see this I fked up :D
+		</div>
+	</body>
+</html>

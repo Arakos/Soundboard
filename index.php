@@ -37,7 +37,7 @@ class mymain {
 						style="background-color: rgba('.$colors[$category].',0.6)"
 						onclick="return play(\'sounds/'.$sound.'\');">
 							<span class="tooltiptext">'.$name.'</span>
-							<img validplaytarget="true" alt="" draggable="false" id="soundimg" src="img/'.$category.'.jpg">
+							<img validplaytarget="true" alt="" draggable="false" id="soundimg" src="img/category/'.$category.'.jpg">
 							<div validplaytarget="true" class="soundname truncate">'.$name.'</div>
 							<a class="chipbutton" onclick="addCopy(this.parentNode)">
 								<i name="soundchipbuttonicon" class="soundchipbuttonicon material-icons">add</i>

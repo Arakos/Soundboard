@@ -51,3 +51,10 @@ function makeToast(str, time = 1500) {
 		setTimeout(function() {toast.style.display = 'none';}, time);
 	}
 }
+
+function replaceAll(src, find, replace) {
+	if(src && find && replace) {
+		return src.replace(new RegExp(find, 'g'), replace);
+	}
+	return src;
+}

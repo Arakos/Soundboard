@@ -31,7 +31,6 @@
 #trash {
 	margin-bottom:20px; 
 	min-height: 70px; 
-	background: url(../img/delete_small.png) no-repeat center; 
 	background-color:rgba(128,30,30,0.6);
 }
 
@@ -163,7 +162,7 @@
 /* ============================= others ====================================== */
 
 body {
-	background-image: url(../img/marceldavis.jpg);
+	background-image: url(../img/background_large.jpg);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position-x: center;

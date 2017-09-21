@@ -16,19 +16,28 @@ function showOrHide(node) {
 }
 
 function init(initSounds) {
-	if(initSounds.length > 0) {
-		var container = document.getElementById('concatcontainer');
-		for(var i = 0; i < initSounds.length; i++) {
-			try {
-				addCopy(document.getElementById(initSounds[i]));
-			} catch(err) {
-				console.log('Cannot find element for id: ' + initSounds[i]);
-				console.log(err);
+	if(Array.isArray(initSounds)) {
+		if(initSounds.length > 0) {
+			var container = document.getElementById('concatcontainer');
+			for(var i = 0; i < initSounds.length; i++) {
+				try {
+					addCopy(document.getElementById(initSounds[i]));
+				} catch(err) {
+					console.log('Cannot find element for id: ' + initSounds[i]);
+					console.log(err);
+				}
 			}
+			showOrHide(document.getElementById('bottom-small'));
 		}
-		showOrHide(document.getElementById('bottom-small'));
+		play('sounds/davis.Hallo.mp3');
+		
+	} else {
+		doXHTTPReq("php/SoundRequestHandler.php?key=" + initSounds, 
+			function(result) {
+				init(result.split(';'));
+			}
+		);
 	}
-	play('sounds/davis.Hallo.mp3');
 }
 
 
@@ -39,6 +48,7 @@ function copyToClipboard(str){
 		event.clipboardData.setData("Text", str);
 		event.preventDefault();
     };
+	console.log("copy to clipboad: " + str);
     document.execCommand("Copy");
     document.oncopy = tmp;
 }
@@ -58,3 +68,15 @@ function replaceAll(src, find, replace) {
 	}
 	return src;
 }
+
+function doXHTTPReq(args, handler) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			handler(xhttp.responseText);
+		};
+	}
+	xhttp.open("GET", args, true);
+	xhttp.send();
+}
+

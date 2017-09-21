@@ -54,6 +54,14 @@ class mymain {
 	}
 	
 	public static function processGetArguments() {
+		if(isset($_GET['key'])) {
+			return '"'.$_GET['key'].'"';
+		}
+		return mymain::processGetArgumentsOLD();
+	}
+
+	
+	public static function processGetArgumentsOLD() {
 		try {
 			$res = 'new Array( ';
 			foreach($_GET as $arg => $value) {

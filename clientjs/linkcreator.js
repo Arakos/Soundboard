@@ -5,8 +5,7 @@ function createLink() {
 		for(var i = 0; i < containerElements.length; i++) {
 			var elm = containerElements[i];
 			if(elm.id) {
-				var sound = elm.id.split(':')[1];
-				linkText += 's' + i + '=' + replaceAll(sound,' ', '%20') + '&';
+				linkText += 's' + i + '=' + elm.id.split(':')[1].replace(new RegExp(' ', 'g'), '%20') + '&';
 			}
 			if(linkText.length > 1500) {
 				makeToast('To many sounds in queue! Cant create Link!');
@@ -17,9 +16,18 @@ function createLink() {
 		console.log(err);
 	}
 	if(linkText !== '') {
-		copyToClipboard(window.location.href.split('?')[0] + '?' + linkText.substring(0,linkText.length-1));
-		makeToast('Link copied to Clipboard');
-	} else {
-		makeToast('No sounds to share ...');
+		doXHTTPReq("php/SoundRequestHandler.php?" + linkText.substring(0,linkText.length-1), 
+			function(response) {
+				console.log("XHTML res: " + response);
+				makeToast('<a style="line-height: 1.5em; height: 1.5em" class="waves-effect waves-light btn" onmouseup="linkToClipboardHelper(\'' + window.location.href.split('?')[0] + '?key=' + response + '\')">Copy to clipboard</a>', 5000);
+			}
+		);
 	}
 }
+
+function linkToClipboardHelper(linkText) {
+	copyToClipboard(linkText);
+	makeToast("Link copied!", 2000);
+}
+
+

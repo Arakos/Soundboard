@@ -2,7 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/FileHelper.php';
 
-class mymain {
+class Soundboard {
 	
 	
 	public static function main() {
@@ -11,7 +11,7 @@ class mymain {
 		
 		echo '
 		
-		<script>window.addEventListener("DOMContentLoaded", function() {init('.mymain::processGetArguments().');}, false);</script>
+		<script>window.addEventListener("DOMContentLoaded", function() {init('.Soundboard::processGetArguments().');}, false);</script>
 		
 		';
 		
@@ -54,10 +54,10 @@ class mymain {
 	}
 	
 	public static function processGetArguments() {
-		if(isset($_GET['key'])) {
+		if(isset($_GET['key']) && preg_match('/^[a-zA-Z0-9]{3,100}$/',$_GET['key'])) {
 			return '"'.$_GET['key'].'"';
 		}
-		return mymain::processGetArgumentsOLD();
+		return Soundboard::processGetArgumentsOLD();
 	}
 
 	
@@ -76,4 +76,4 @@ class mymain {
 	
 }
 
-mymain::main();
+Soundboard::main();

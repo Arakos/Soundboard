@@ -2,14 +2,14 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/../../files/config.php';
 
-class mymain {
+class SoundRequestHelper {
 	
 	
 	public static function main() {
 		if(isset($_GET['key'])) {
-			echo mymain::getSoundValue($_GET['key']);
+			echo SoundRequestHelper::getSoundValue($_GET['key']);
 		} else {
-			echo mymain::getSoundKey();
+			echo SoundRequestHelper::getSoundKey();
 		}
 	}
 	
@@ -66,4 +66,4 @@ class mymain {
 	
 }
 
-mymain::main();
+SoundRequestHelper::main();

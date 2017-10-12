@@ -40,7 +40,7 @@ class SoundRequestHelper {
 			}
 			if(strlen($res) > 0) {
 				$res = substr($res,0,strlen($res)-1);
-				$key = hash("md5", $res);
+				$key = SoundRequestHelper::simpleHash($res);
 				$db = getDBConnect();
 				
 				if($result = $db->query('SELECT soundvalues FROM Soundboard WHERE soundkey = "'.$key.'"')) {
@@ -62,6 +62,20 @@ class SoundRequestHelper {
 		} catch(Exception $e) {
 			return 'ERROR: '.$e;
 		}
+	}
+	
+	public static function simpleHash($str) {
+		$hash = 1;
+		$cnt = 0;
+		if (strlen($str) > 0) {
+			while (strlen($str) > $cnt) {
+				$char = ord($str[$cnt]);
+				$hash = $hash * 31 + $char;
+				$hash = ($hash % 10000000);
+				$cnt = $cnt + 1;
+			}
+		}
+		return $hash;
 	}
 	
 }

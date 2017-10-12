@@ -1,13 +1,15 @@
 function createLink() {
 	var containerElements = document.getElementById('concatcontainer').childNodes;
-	var linkText = '';
+	var linkTextServer = '';
+	var linkTextClient = '';
 	try {
 		for(var i = 0; i < containerElements.length; i++) {
 			var elm = containerElements[i];
 			if(elm.id) {
-				linkText += 's' + i + '=' + elm.id.split(':')[1].replace(new RegExp(' ', 'g'), '%20') + '&';
+				linkTextServer += 's' + i + '=' + elm.id.split(':')[1].replace(new RegExp(' ', 'g'), '%20') + '&';
+				linkTextClient += elm.id.split(':')[1] + ';';
 			}
-			if(linkText.length > 1500) {
+			if(linkTextServer.length > 1500) {
 				makeToast('To many sounds in queue! Cant create Link!');
 				return;
 			}
@@ -15,19 +17,37 @@ function createLink() {
 	} catch(err) {
 		console.log(err);
 	}
-	if(linkText !== '') {
-		doXHTTPReq("php/SoundRequestHandler.php?" + linkText.substring(0,linkText.length-1), 
+	if(linkTextServer !== '') {
+		linkTextServer = linkTextServer.substring(0,linkTextServer.length-1);
+		linkTextClient = linkTextClient.substring(0,linkTextClient.length-1);
+		doXHTTPReq("php/SoundRequestHandler.php?" + linkTextServer, 
 			function(response) {
 				console.log("XHTML res: " + response);
-				makeToast('<a style="line-height: 1.5em; height: 1.5em" class="waves-effect waves-light btn" onmouseup="linkToClipboardHelper(\'' + window.location.href.split('?')[0] + '?key=' + response + '\')">Copy to clipboard</a>', 5000);
+				if(!response.match('^[0-9]*$')) {
+					makeToast("An Error occured. Your soundlink may not work correctly.", 3000);
+				}
 			}
 		);
+		copyToClipboard(window.location.href.split('?')[0] + '?key=' + simpleHash(linkTextClient));
+		makeToast("Link copied!", 2000);
 	}
 }
 
 function linkToClipboardHelper(linkText) {
 	copyToClipboard(linkText);
 	makeToast("Link copied!", 2000);
+}
+
+
+function simpleHash(str) {
+	var hash = 1;
+	if (str.length == 0) return hash;
+	for (i = 0; i < str.length; i++) {
+		var charat = str.charCodeAt(i);
+		hash = 31 * hash + charat;
+		hash = hash % 10000000;
+	}
+	return hash;
 }
 
 

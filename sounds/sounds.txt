@@ -1,0 +1,4 @@
+place your sounds here.
+pattern: 
+
+categoryname.displayname.mp3

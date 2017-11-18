@@ -1,0 +1,3 @@
+place ur images to display for sounds of a category here. They must be named
+
+categoryname.jpg

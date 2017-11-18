@@ -15,12 +15,30 @@ class Soundboard {
 		
 		';
 		
+		$filehelper = new FileHelper('/beats');
+		$beats = $filehelper->get_files();
+		if(count($beats)) {
+			echo '
+			<!-- Dropdown Structure -->
+			<ul id="dropdown1" class="dropdown-content">
+				<li><a href="#!" onclick="stopBeat()">Keiner</a></li>';
+				
+			foreach($beats as $beat) {
+				$tmp = explode(".", $beat);
+				echo'
+				<li><a href="#!" onclick="playBeat(\'beats/'.$beat.'\')">'.$tmp[0].'</a></li>';
+			}
+			echo '
+			</ul>
+			';
+		}
+		
 		$filehelper = new FileHelper('/sounds');
 		$colors = array();
 		$sounds = $filehelper->get_files();
 		if(count($sounds)) {
 			foreach($sounds as $sound) {
-				$tmp = split('\.',$sound);
+				$tmp = explode('.',$sound);
 				$category = $tmp[0];
 				$name = $tmp[1];
 				if(!isset($colors[$category])) {

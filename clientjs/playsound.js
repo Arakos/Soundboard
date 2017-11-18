@@ -1,4 +1,5 @@
 var sound = new Audio();
+var beat = new Audio();
 var soundObjects = new Array();
 
 
@@ -117,3 +118,57 @@ function playMashUp() {
 	progress.width = '0%';
 	playAll(soundfiles, progress);
 }
+
+function playBeat(beatName) {
+	stopBeat();
+	setBeatButtonText(beatName.replace("beats/", "").replace("\.mp3", ""));
+	console.log("playing beat: " + beatName.replace("beats/", "").replace("\.mp3", ""));
+	beat.src = beatName;
+	beat.volume = 0.6;
+	beat.onended = function() {
+		beat.currentTime = 0;
+		beat.play();
+	}
+	beat.play();
+	beatVolume(false);
+}
+
+function tmpBeatFunc() {
+	var tmp = document.getElementById("tmpBeatButton");
+	var toggleValue = tmp.attributes["data-toggle"].value;
+	if(toggleValue == "0") {
+		tmp.attributes["data-toggle"].value = "1";
+		tmp.innerHTML = "Stop Background Beat";
+		playBeat("beats/Beat 1.mp3");
+	} else {
+		tmp.attributes["data-toggle"].value = "0";
+		tmp.innerHTML = "Play Background Beat";
+		stopBeat();
+	}
+}
+
+function setBeatButtonText(buttonText) {
+	//document.getElementById("backgroundBeatButton").innerHTML = buttonText;
+}
+
+
+function beatVolume(increase) {
+	if(beat.paused) {
+		return;
+	}
+	if(increase) {
+		beat.volume = beat.volume >= 0.9 ? 1.0 : beat.volume + 0.1;
+	} else {
+		beat.volume = beat.volume <= 0.3 ? 0.2 : beat.volume - 0.1;
+	}
+	makeToast("Volume: " + (beat.volume * 100).toFixed() + "%", 800);
+}
+
+function stopBeat() {
+	setBeatButtonText("Background Beat");
+	beat.pause();
+	beat.currentTime = 0;
+}
+	
+	
+	

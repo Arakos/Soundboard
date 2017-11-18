@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="clientjs/linkcreator.js"></script>
 		<script type="text/javascript" src="clientjs/dragdropmanager.js"></script>
 		<script type="text/javascript" src="clientjs/util.js"></script>	
-		<title>YAT - Yet Another Soundboard</title>
+		<title>YAS - Yet Another Soundboard</title>
 	</head>
 	<body>
 		<div class="row">
@@ -34,6 +34,23 @@
 				<div class="col s1 m2 l3">
 					<a id="delSearchButton" href="" onclick="return false" onmouseup="delSearch()" class="left-align">
 						<i class="material-icons" style="font-size: 46px">highlight_off</i>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s10 m8 l6">
+					<!-- Dropdown Trigger -->
+					<!--<a id="backgroundBeatButton" class='dropdown-button btn' href='#' data-activates='dropdown1'>Background Beat</a>-->
+					<a style="height: 3em; line-height: 3em" id="tmpBeatButton" class="btn" data-toggle="0" onclick="tmpBeatFunc()" href="#!">Play Background Beat</a>
+				</div>
+				<div class="col s1 m2 l3">
+					<a href="#!" onclick="beatVolume(true)">
+						<i class="material-icons" style="color: black; font-size: 2.5em; text-align: center">add_circle_outline</i>
+					</a>
+				</div>
+				<div class="col s1 m2 l3">
+					<a href="#!" onclick="beatVolume(false)">
+						<i class="material-icons soundchipbuttonicon " style="color: black; font-size: 2.5em; text-align: center">remove_circle_outline</i>
 					</a>
 				</div>
 			</div>
